@@ -262,7 +262,6 @@ export const parse = async (der) => {
       critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),
       templateMajorVersion: msct.templateMajorVersion.value,
       };
-    
   }
 
   // get the embedded SCTs
