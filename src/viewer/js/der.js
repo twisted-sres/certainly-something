@@ -259,8 +259,8 @@ export const parse = async (der) => {
   let msct = getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue;
   if (msct) {
     msct = {
-      critical: false,
-      templateID: msct.templateID.map(x => x.templateID[0].value),
+      critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),
+      templateMajorVersion: msct.templateMajorVersion.value,
       };
     
   }
@@ -366,6 +366,7 @@ export const parse = async (der) => {
       cp,
       eKeyUsages,
       keyUsages,
+      msct,
       ocspStaple,
       scts: scts,
       sKID,

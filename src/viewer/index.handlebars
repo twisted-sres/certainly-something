@@ -310,13 +310,11 @@
                 Microsoft Certificate Template
               </span>
             </div>
+            <div class="panel-list-item">
+              <div class="text">Major Version</div>
+              <div class="text long-hex long-hex-box">{{ this.ext.msct.templateMajorVersion }}</div>
+            </div>
             
-              {{#each this.ext.msct.templateID}}
-              <div class="panel-list-item">
-                <div class="text">Template ID {{onebasedindex @index}}</div>
-                <div class="text breakable">{{ this.templateID }}</div>
-              </div>
-            {{/each}}
             
           {{/if}}
 
