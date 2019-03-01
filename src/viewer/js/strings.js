@@ -31,6 +31,12 @@ export const strings = {
     },
 
     // certificate extensions
+    '1.3.6.1.4.1.311.21.7': {
+      name: {
+        short: 'Miscrosoft Certificate Template',
+        long: 'Microsoft Certificate Template',
+      }
+    },
     '1.3.6.1.4.1.11129.2.4.2': {
       name: {
         short: 'Embedded SCTs',

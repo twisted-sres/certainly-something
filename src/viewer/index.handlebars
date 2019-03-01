@@ -302,6 +302,24 @@
             {{/each}}
           {{/if}}
 
+          {{! Microsoft Certificate Template }}
+          {{#if this.ext.msct}}
+            <div class="panel-section-subheader">
+              <span>
+                {{#if this.ext.msct.critical}}<img class="critical" alt="critical extension" title="This extension has been marked as critical, meaning that clients must reject the certificate if they don't understand it." src="../icons/critical.svg">{{/if~}}
+                Microsoft Certificate Template
+              </span>
+            </div>
+            
+              {{#each this.ext.msct.templateID}}
+              <div class="panel-list-item">
+                <div class="text">Template ID {{onebasedindex @index}}</div>
+                <div class="text breakable">{{ this.templateID }}</div>
+              </div>
+            {{/each}}
+            
+          {{/if}}
+
           {{! Certificate policies }}
           {{#if this.ext.cp.policies}}
             <div class="panel-section-subheader">

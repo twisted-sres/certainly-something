@@ -59,6 +59,7 @@ const parseSubsidiary = (distinguishedNames) => {
 export const parse = async (der) => {
   const supportedExtensions = [
     '1.3.6.1.4.1.11129.2.4.2',  // embedded scts
+    '1.3.6.1.4.1.311.21.7',      //Microsoft certificate template
     '1.3.6.1.5.5.7.1.1',        // authority info access
     '1.3.6.1.5.5.7.1.24',       // ocsp stapling
     '2.5.29.14',                // subject key identifier
@@ -252,6 +253,16 @@ export const parse = async (der) => {
   aia = {
     descriptions: aia,
     critical: criticalExtensions.includes('1.3.6.1.5.5.7.1.1'),
+  }
+
+   // get the Microsoft Certificate Template 
+  let msct = getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue;
+  if (msct) {
+    msct = {
+      critical: false,
+      templateID: msct.templateID.map(x => x.templateID[0].value),
+      };
+    
   }
 
   // get the embedded SCTs
