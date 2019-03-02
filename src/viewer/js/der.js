@@ -59,7 +59,7 @@ const parseSubsidiary = (distinguishedNames) => {
 export const parse = async (der) => {
   const supportedExtensions = [
     '1.3.6.1.4.1.11129.2.4.2',  // embedded scts
-    '1.3.6.1.4.1.311.21.7',      //Microsoft certificate template
+    '1.3.6.1.4.1.311.21.7',     //Microsoft certificate template
     '1.3.6.1.5.5.7.1.1',        // authority info access
     '1.3.6.1.5.5.7.1.24',       // ocsp stapling
     '2.5.29.14',                // subject key identifier
@@ -255,15 +255,7 @@ export const parse = async (der) => {
     critical: criticalExtensions.includes('1.3.6.1.5.5.7.1.1'),
   }
 
-   // get the Microsoft Certificate Template 
-  let msct = getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue;
-  if (msct) {
-    msct = {
-      critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),
-      templateMajorVersion: msct.templateMajorVersion.value,
-      };
-  }
-
+  
   // get the embedded SCTs
   let scts = getX509Ext(x509.extensions, '1.3.6.1.4.1.11129.2.4.2').parsedValue;
   if (scts) {
@@ -343,6 +335,15 @@ export const parse = async (der) => {
   cp = {
     critical: criticalExtensions.includes('2.5.29.32'),
     policies: cp,
+  }
+  
+  // get the Microsoft Certificate Template 
+  let msct = { certificateTemplate: getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue, }
+  if (msct.certificateTemplate) {
+    msct = {
+      critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),
+      templateMajorVersion: msct.certificateTemplate.templateMajorVersion.value,
+      };
   }
 
   // determine which extensions weren't supported

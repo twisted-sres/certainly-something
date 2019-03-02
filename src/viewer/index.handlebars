@@ -302,20 +302,7 @@
             {{/each}}
           {{/if}}
 
-          {{! Microsoft Certificate Template }}
-          {{#if this.ext.msct}}
-            <div class="panel-section-subheader">
-              <span>
-                {{#if this.ext.msct.critical}}<img class="critical" alt="critical extension" title="This extension has been marked as critical, meaning that clients must reject the certificate if they don't understand it." src="../icons/critical.svg">{{/if~}}
-                Microsoft Certificate Template
-              </span>
-            </div>
-            <div class="panel-list-item">
-              <div class="text">Major Version</div>
-              <div class="text long-hex long-hex-box">{{ this.ext.msct.templateMajorVersion }}</div>
-            </div>
-          {{/if}}
-
+          
           {{! Certificate policies }}
           {{#if this.ext.cp.policies}}
             <div class="panel-section-subheader">
@@ -383,6 +370,21 @@
               </div>
               {{#unless @last}}<div class="panel-list-item-separator"></div>{{/unless}}
             {{/each}}
+          {{/if}}
+
+          
+          {{! Microsoft Certificate Template }}
+          {{#if this.ext.msct}}
+            <div class="panel-section-subheader">
+              <span>
+                {{#if this.ext.msct.critical}}<img class="critical" alt="critical extension" title="This extension has been marked as critical, meaning that clients must reject the certificate if they don't understand it." src="../icons/critical.svg">{{/if~}}
+                Microsoft Certificate Template
+              </span>
+            </div>
+            <div class="panel-list-item">
+              <div class="text">Major Version</div>
+              <div class="text long-hex long-hex-box">{{ this.ext.msct.templateMajorVersion }}</div>
+            </div>
           {{/if}}
 
           {{! Unsupported extensions }}
