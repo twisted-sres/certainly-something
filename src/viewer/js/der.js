@@ -338,12 +338,12 @@ export const parse = async (der) => {
   }
   
   // get the Microsoft Certificate Template 
-  let msct = { certificateTemplate: getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue, }
+  let msct = { certificateTemplate: getX509Ext(x509.extensions, '1.3.6.1.4.1.311.21.7').parsedValue,}
   if (msct.certificateTemplate) {
     msct = {
-      critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),
       templateMajorVersion: msct.certificateTemplate.templateMajorVersion.value,
       };
+    msct.certificateTemplate = {critical: criticalExtensions.includes('1.3.6.1.4.1.311.21.7'),};
   }
 
   // determine which extensions weren't supported
